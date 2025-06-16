@@ -1,0 +1,32 @@
+<header class="dashboard-header">
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  <nav>
+    <a class="logout" href="#" (click)="logout()">Se déconnecter</a>
+    <a routerLink="/dashboard">Articles</a>
+    <a href="#">Thèmes</a>
+    <span class="profile-icon">
+      <img src="/assets/profile-placeholder.png" alt="Profil" />
+    </span>
+  </nav>
+</header>
+
+<main class="dashboard-main">
+  <div class="dashboard-actions">
+    <button class="create-article">Créer un article</button>
+    <div class="sort-section">
+      <span>Trier par</span>
+      <span class="sort-arrow">↓</span>
+    </div>
+  </div>
+
+  <div class="articles-grid">
+    <div class="article-card" *ngFor="let article of articles">
+      <h3>Titre de l'article</h3>
+      <div class="meta">
+        <span>Date</span>
+        <span>Auteur</span>
+      </div>
+      <p>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</p>
+    </div>
+  </div>
+</main>

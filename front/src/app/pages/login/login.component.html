@@ -1,0 +1,33 @@
+<div class="login-header">
+  <img src="/assets/logo_p6.png" alt="logo" class="login-logo" />
+</div>
+<div class="login-bar"></div>
+<div class="login-main">
+  <button class="back-button" (click)="goBack()">&#8592;</button>
+  <h2>Se connecter</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label for="email">E-mail ou nom d'utilisateur</label>
+    <input id="email" formControlName="email" type="text" />
+    <div class="error-message" *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+      L'email est requis
+    </div>
+    <div class="error-message" *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">
+      Format d'email invalide
+    </div>
+
+    <label for="password">Mot de passe</label>
+    <input id="password" formControlName="password" type="password" />
+    <div class="error-message" *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+      Le mot de passe est requis
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
+      <span *ngIf="!isLoading">Se connecter</span>
+      <span *ngIf="isLoading">Connexion en cours...</span>
+    </button>
+  </form>
+</div>
