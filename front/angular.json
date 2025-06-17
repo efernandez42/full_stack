@@ -25,7 +25,8 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.png", "src/assets"],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -90,7 +91,8 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.png", "src/assets"],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles/styles.scss"
             ],
             "scripts": []
           }
@@ -99,6 +101,6 @@
     }
   },
   "cli": {
-    "analytics": "6d9caec0-133b-4d95-af79-ab88888e9370"
+    "analytics": false
   }
 }
