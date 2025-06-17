@@ -12,16 +12,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, DashboardComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
     ReactiveFormsModule,
+    AppComponent,
+    HomeComponent,
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}
