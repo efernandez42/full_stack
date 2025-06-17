@@ -21,12 +21,12 @@
 
   <div class="articles-grid">
     <div class="article-card" *ngFor="let article of articles">
-      <h3>Titre de l'article</h3>
+      <h3>{{ article.title }}</h3>
       <div class="meta">
-        <span>Date</span>
-        <span>Auteur</span>
+        <span>{{ article.topic.name }}</span>
+        <span>{{ article.author.username }}</span>
       </div>
-      <p>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</p>
+      <p>{{ article.content }}</p>
     </div>
   </div>
 </main>
