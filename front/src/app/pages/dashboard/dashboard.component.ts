@@ -10,6 +10,9 @@ import { ArticleService, Article } from '../../services/article.service';
 })
 export class DashboardComponent implements OnInit {
   articles: Article[] = [];
+  sortAsc: boolean = false;
+  sortedArticles: Article[] = [];
+  sortMenuOpen = false;
 
   constructor(
     private authService: AuthService,
@@ -32,8 +35,26 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  toggleSortOrder() {
+    this.sortAsc = !this.sortAsc;
+    this.applySort();
+  }
+
+ applySort() {
+    this.sortedArticles = [...this.articles].sort((a, b) => {
+      // On suppose que la date est dans un champ 'createdAt' (à adapter si besoin)
+      const dateA = new Date((a as any).createdAt || (a as any).date || 0).getTime();
+      const dateB = new Date((b as any).createdAt || (b as any).date || 0).getTime();
+      return this.sortAsc ? dateA - dateB : dateB - dateA;
+    });
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  goToCreateArticle() {
+    this.router.navigate(['/articles/nouveau']);
   }
 }

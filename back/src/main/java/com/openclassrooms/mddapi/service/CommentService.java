@@ -22,6 +22,10 @@ public class CommentService {
         return commentRepository.findById(id);
     }
 
+    public List<Comment> findByArticleId(Long articleId) {
+        return commentRepository.findByArticleIdOrderByCreatedAtDesc(articleId);
+    }
+
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
@@ -29,4 +33,4 @@ public class CommentService {
     public void deleteById(Long id) {
         commentRepository.deleteById(id);
     }
-} 
+}

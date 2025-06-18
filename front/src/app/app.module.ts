@@ -9,10 +9,14 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {HttpClientModule} from "@angular/common/http";
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CreateArticleComponent } from './pages/create-article/create-article.component';
+import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { TopicsComponent } from './pages/topics/topics.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, AppComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, AppComponent, CreateArticleComponent, ArticleDetailComponent, ProfileComponent, TopicsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     HomeComponent,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -21,12 +21,4 @@ public class TopicService {
     public Optional<Topic> findById(Long id) {
         return topicRepository.findById(id);
     }
-
-    public Topic save(Topic topic) {
-        return topicRepository.save(topic);
-    }
-
-    public void deleteById(Long id) {
-        topicRepository.deleteById(id);
-    }
 } 

@@ -13,7 +13,9 @@
 					"name": "Get All Articles",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/articles",
 							"host": ["{{base_url}}"],
@@ -25,7 +27,9 @@
 					"name": "Get Article by ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/articles/:id",
 							"host": ["{{base_url}}"],
@@ -44,14 +48,12 @@
 					"request": {
 						"method": "POST",
 						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Mon article\",\n    \"content\": \"Contenu de l'article\",\n    \"author\": {\n        \"id\": 1\n    },\n    \"topic\": {\n        \"id\": 1\n    }\n}"
+							"raw": "{\n    \"title\": \"Mon article\",\n    \"content\": \"Contenu de l'article\",\n    \"topic\": {\n        \"id\": 1\n    }\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/articles",
@@ -68,7 +70,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
-							}
+							},
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
 						],
 						"body": {
 							"mode": "raw",
@@ -91,7 +94,9 @@
 					"name": "Delete Article",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/articles/:id",
 							"host": ["{{base_url}}"],
@@ -114,7 +119,9 @@
 					"name": "Get All Comments",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/comments",
 							"host": ["{{base_url}}"],
@@ -126,7 +133,9 @@
 					"name": "Get Comment by ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/comments/:id",
 							"host": ["{{base_url}}"],
@@ -145,14 +154,12 @@
 					"request": {
 						"method": "POST",
 						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"content\": \"Mon commentaire\",\n    \"author\": {\n        \"id\": 1\n    },\n    \"article\": {\n        \"id\": 1\n    }\n}"
+							"raw": "{\n    \"content\": \"Mon commentaire\",\n    \"article\": {\n        \"id\": 1\n    }\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/comments",
@@ -169,7 +176,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
-							}
+							},
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
 						],
 						"body": {
 							"mode": "raw",
@@ -192,7 +200,9 @@
 					"name": "Delete Comment",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/comments/:id",
 							"host": ["{{base_url}}"],
@@ -202,6 +212,23 @@
 									"key": "id",
 									"value": "1"
 								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Comments by ArticleId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/comments/article/:articleId",
+							"host": ["{{base_url}}"],
+							"path": ["api", "comments", "article", ":articleId"],
+							"variable": [
+								{ "key": "articleId", "value": "1" }
 							]
 						}
 					}
@@ -215,7 +242,9 @@
 					"name": "Get All Topics",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/topics",
 							"host": ["{{base_url}}"],
@@ -227,7 +256,9 @@
 					"name": "Get Topic by ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/topics/:id",
 							"host": ["{{base_url}}"],
@@ -249,7 +280,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
-							}
+							},
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
 						],
 						"body": {
 							"mode": "raw",
@@ -270,7 +302,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
-							}
+							},
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
 						],
 						"body": {
 							"mode": "raw",
@@ -293,7 +326,9 @@
 					"name": "Delete Topic",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
 						"url": {
 							"raw": "{{base_url}}/api/topics/:id",
 							"host": ["{{base_url}}"],
@@ -304,6 +339,114 @@
 									"value": "1"
 								}
 							]
+						}
+					}
+				},
+				{
+					"name": "Subscribe to Topic",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/topics/:id/subscribe",
+							"host": ["{{base_url}}"],
+							"path": ["api", "topics", ":id", "subscribe"],
+							"variable": [
+								{ "key": "id", "value": "1" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Unsubscribe from Topic",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/topics/:id/unsubscribe",
+							"host": ["{{base_url}}"],
+							"path": ["api", "topics", ":id", "unsubscribe"],
+							"variable": [
+								{ "key": "id", "value": "1" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Subscribed Topics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/topics/subscribed",
+							"host": ["{{base_url}}"],
+							"path": ["api", "topics", "subscribed"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Auth & User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@email.com\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@email.com\",\n    \"password\": \"password\",\n    \"username\": \"username\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"nouvel@email.com\",\n    \"username\": \"nouveauNom\",\n    \"password\": \"nouveauMdp\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "profile"]
 						}
 					}
 				}

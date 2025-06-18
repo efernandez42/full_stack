@@ -1,49 +1,49 @@
-<div class="register-container">
-  <header class="register-header">
-    <img src="/assets/logo_p6.png" alt="logo" />
-  </header>
+<div>
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+</div>
+<div class="bar"></div>
+<div class="main">
+  <button class="back-button" (click)="goBack()">&#8592;</button>
+  <h2>Inscription</h2>
 
-  <div class="register-card">
-    <button class="back-button" (click)="goBack()">&larr;</button>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label for="username">Nom d'utilisateur</label>
+    <input id="username" formControlName="username" type="text" />
+    <div class="error-message" *ngIf="registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched">
+      Le nom d'utilisateur est requis
+    </div>
+    <div class="error-message" *ngIf="registerForm.get('username')?.errors?.['minlength'] && registerForm.get('username')?.touched">
+      Le nom d'utilisateur doit contenir au moins 3 caractères
+    </div>
 
-    <h2>Inscription</h2>
+    <label for="email">Adresse e-mail</label>
+    <input id="email" formControlName="email" type="email" />
+    <div class="error-message" *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched">
+      L'email est requis
+    </div>
+    <div class="error-message" *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched">
+      Format d'email invalide
+    </div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <label for="username">Nom d'utilisateur</label>
-      <input id="username" formControlName="username" type="text" />
-      <div class="error-message" *ngIf="registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched">
-        Le nom d'utilisateur est requis
-      </div>
-      <div class="error-message" *ngIf="registerForm.get('username')?.errors?.['minlength'] && registerForm.get('username')?.touched">
-        Le nom d'utilisateur doit contenir au moins 3 caractères
-      </div>
+    <label for="password">Mot de passe</label>
+    <input id="password" formControlName="password" type="password" />
+    <div class="error-message" *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched">
+      Le mot de passe est requis
+    </div>
+    <div class="error-message" *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched">
+      Le mot de passe doit contenir au moins 8 caractères
+    </div>
+    <div class="error-message" *ngIf="registerForm.get('password')?.errors?.['passwordStrength'] && registerForm.get('password')?.touched">
+      Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial
+    </div>
 
-      <label for="email">Adresse e-mail</label>
-      <input id="email" formControlName="email" type="email" />
-      <div class="error-message" *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched">
-        L'email est requis
-      </div>
-      <div class="error-message" *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched">
-        Format d'email invalide
-      </div>
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
 
-      <label for="password">Mot de passe</label>
-      <input id="password" formControlName="password" type="password" />
-      <div class="error-message" *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched">
-        Le mot de passe est requis
-      </div>
-      <div class="error-message" *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched">
-        Le mot de passe doit contenir au moins 6 caractères
-      </div>
-
-      <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
-      </div>
-
-      <button type="submit" class="submit-btn" [disabled]="registerForm.invalid || isLoading">
-        <span *ngIf="!isLoading">S'inscrire</span>
-        <span *ngIf="isLoading">Inscription en cours...</span>
-      </button>
-    </form>
-  </div>
+    <button type="submit" class="submit-btn" [disabled]="registerForm.invalid || isLoading">
+      <span *ngIf="!isLoading">S'inscrire</span>
+      <span *ngIf="isLoading">Inscription en cours...</span>
+    </button>
+  </form>
 </div>

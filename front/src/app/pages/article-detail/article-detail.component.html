@@ -1,0 +1,43 @@
+<header class="header">
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  <nav>
+    <a class="logout" routerLink="/login">Se déconnecter</a>
+    <a routerLink="/dashboard">Articles</a>
+    <a href="">Thèmes</a>
+    <span class="profile-icon">
+      <img src="/assets/profile-placeholder.png" alt="Profil" />
+    </span>
+  </nav>
+</header>
+
+<main class="main">
+  <button class="back-button" (click)="goBack()">&#8592;</button>
+  <h3 class="title">{{ article?.title}}</h3>
+  <div *ngIf="isLoading">Chargement...</div>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div *ngIf="article && !isLoading">
+    <div class="meta-row">
+      <span>{{ article.updatedAt | date:'dd/MM/yyyy' }}</span>
+      <span> {{ article.author.username }}</span>
+      <span>{{ article.topic.name }}</span>
+    </div>
+    <div class="content-block">
+      <span>Content:</span> {{ article.content }}
+    </div>
+    <hr />
+    <div class="comments-section">
+      <h3>Commentaires</h3>
+      <div *ngIf="comments.length === 0" class="no-comments">Aucun commentaire pour cet article.</div>
+      <div *ngFor="let comment of comments" class="comment-row">
+        <span class="comment-username">{{ comment.author.username }}</span>
+        <div class="comment-bubble">{{ comment.content }}</div>
+      </div>
+      <form class="comment-form" (ngSubmit)="postComment()">
+        <textarea placeholder="Écrivez ici votre commentaire" [(ngModel)]="newComment" name="comment" required></textarea>
+        <button type="submit" class="send-btn" [disabled]="!newComment.trim()">
+          <svg width="32" height="32" viewBox="0 0 24 24"><path d="M2 21l21-9-21-9v7l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</main> 

@@ -1,0 +1,25 @@
+<header class="dashboard-header">
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  <nav>
+    <a class="logout" routerLink="/login">Se déconnecter</a>
+    <a routerLink="/dashboard">Articles</a>
+    <a href="">Thèmes</a>
+    <span class="profile-icon">
+      <img src="/assets/profile-placeholder.png" alt="Profil" />
+    </span>
+  </nav>
+</header>
+
+<main class="dashboard-main">
+  <button class="back-btn" routerLink="/dashboard">&#8592;</button>
+  <h2 class="title">Créer un nouvel article</h2>
+  <form class="create-article-form" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <select formControlName="topic_id">
+      <option value="" disabled selected>Sélectionner un thème</option>
+      <option *ngFor="let topic of topics" [value]="topic.id">{{ topic.name }}</option>
+    </select>
+    <input type="text" placeholder="Titre de l'article" formControlName="title" />
+    <textarea placeholder="Contenu de l'article" formControlName="content"></textarea>
+    <button type="submit" class="submit-btn" [disabled]="articleForm.invalid">Créer</button>
+  </form>
+</main> 

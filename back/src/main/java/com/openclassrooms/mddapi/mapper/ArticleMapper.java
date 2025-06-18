@@ -19,6 +19,7 @@ public class ArticleMapper {
         dto.setId(article.getId());
         dto.setTitle(article.getTitle());
         dto.setContent(article.getContent());
+        dto.setUpdatedAt(article.getUpdatedAt());
 
         if (article.getAuthor() != null) {
             UserDTO authorDTO = new UserDTO();
@@ -38,5 +39,9 @@ public class ArticleMapper {
         }
 
         return dto;
+    }
+
+    public ArticleDTO getDTO(Article article) {
+        return toDTO(article);
     }
 } 

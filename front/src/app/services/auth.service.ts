@@ -90,4 +90,13 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
   }
+
+  updateProfile(profileData: { username: string; email: string; password?: string }): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put('http://localhost:8080/api/auth/profile', profileData, { headers });
+  }
 } 

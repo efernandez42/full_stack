@@ -10,6 +10,8 @@
     "src/polyfills.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "src/app/pages/create-article/**/*.ts",
+    "src/app/pages/profile/**/*.ts"
   ]
 }

@@ -1,0 +1,42 @@
+<header class="dashboard-header">
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  <nav>
+    <a class="logout" routerLink="/login">Se déconnecter</a>
+    <a routerLink="/dashboard">Articles</a>
+    <a href="/themes">Thèmes</a>
+    <a class="profile-icon" routerLink="/profile">
+      <img src="/assets/profile-placeholder.png" alt="Profil" />
+    </a>
+  </nav>
+</header>
+
+<main class="dashboard-main">
+  <h2 class="title">Profil utilisateur</h2>
+  <form class="profile-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Username" formControlName="username" />
+    <input type="email" placeholder="email@email.fr" formControlName="email" />
+    <input type="password" placeholder="Mot de passe" formControlName="password" />
+    <button type="submit" class="save-btn" [disabled]="profileForm.invalid">Sauvegarder</button>
+  </form>
+
+  <hr style="margin: 2rem 0;" />
+
+  <h2 style="text-align:center; margin-bottom: 1.5rem;">Abonnements</h2>
+
+  <div *ngIf="subscribedTopics.length > 0" class="topics-container">
+    <div class="topics-grid">
+      <div class="topic-card" *ngFor="let topic of subscribedTopics">
+        <h3>{{ topic.name }}</h3>
+        <p>Description : {{ topic.description }}</p>
+        <button (click)="unsubscribe(topic)">Se désabonner</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showSuccessPopup" class="popup-success">
+    <div class="popup-content">
+      <p>Profil mis à jour avec succès !</p>
+      <button (click)="closeSuccessPopup()">Fermer</button>
+    </div>
+  </div>
+</main> 

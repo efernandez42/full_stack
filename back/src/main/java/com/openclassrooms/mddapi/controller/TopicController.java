@@ -1,12 +1,18 @@
 package com.openclassrooms.mddapi.controller;
 
+import com.openclassrooms.mddapi.dto.TopicDTO;
+import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.service.TopicService;
+import com.openclassrooms.mddapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/topics")
@@ -15,40 +21,58 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private TopicMapper topicMapper;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping
-    public ResponseEntity<List<Topic>> getAllTopics() {
-        return ResponseEntity.ok(topicService.findAll());
+    public ResponseEntity<List<TopicDTO>> getAllTopics() {
+        List<TopicDTO> topics = topicService.findAll().stream()
+                .map(topicMapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(topics);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Topic> getTopicById(@PathVariable Long id) {
+    public ResponseEntity<TopicDTO> getTopicById(@PathVariable Long id) {
         return topicService.findById(id)
+                .map(topicMapper::toDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<Topic> createTopic(@RequestBody Topic topic) {
-        return ResponseEntity.ok(topicService.save(topic));
+    @PostMapping("/{id}/subscribe")
+    public ResponseEntity<Void> subscribeToTopic(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Topic topic = topicService.findById(id).orElse(null);
+        if (topic == null) {
+            return ResponseEntity.notFound().build();
+        }
+        userService.subscribeToTopic(email, topic);
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Topic> updateTopic(@PathVariable Long id, @RequestBody Topic topic) {
-        return topicService.findById(id)
-                .map(existingTopic -> {
-                    topic.setId(id);
-                    return ResponseEntity.ok(topicService.save(topic));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    @PostMapping("/{id}/unsubscribe")
+    public ResponseEntity<Void> unsubscribeFromTopic(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Topic topic = topicService.findById(id).orElse(null);
+        if (topic == null) {
+            return ResponseEntity.notFound().build();
+        }
+        userService.unsubscribeFromTopic(email, topic);
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTopic(@PathVariable Long id) {
-        return topicService.findById(id)
-                .map(topic -> {
-                    topicService.deleteById(id);
-                    return ResponseEntity.ok().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/subscribed")
+    public ResponseEntity<List<TopicDTO>> getSubscribedTopics() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        List<Topic> topics = userService.getSubscribedTopics(email);
+        List<TopicDTO> topicDTOs = topics.stream().map(topicMapper::toDTO).collect(Collectors.toList());
+        return ResponseEntity.ok(topicDTOs);
     }
 } 

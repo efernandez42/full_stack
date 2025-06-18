@@ -3,30 +3,33 @@
   <nav>
     <a class="logout" href="#" (click)="logout()">Se déconnecter</a>
     <a routerLink="/dashboard">Articles</a>
-    <a href="#">Thèmes</a>
-    <span class="profile-icon">
+    <a routerLink="/themes">Thèmes</a>
+    <a class="profile-icon" routerLink="/profile">
       <img src="/assets/profile-placeholder.png" alt="Profil" />
-    </span>
+    </a>
   </nav>
 </header>
 
 <main class="dashboard-main">
   <div class="dashboard-actions">
-    <button class="create-article">Créer un article</button>
-    <div class="sort-section">
-      <span>Trier par</span>
-      <span class="sort-arrow">↓</span>
+    <button class="create-article" (click)="goToCreateArticle()">Créer un article</button>
+    <div class="sort-section" style="position: relative;">
+      <span>Trier</span>
+      <span class="sort-arrow" (click)="toggleSortOrder()" style="cursor:pointer; font-size: 1.2em;">
+        <ng-container *ngIf="sortAsc">&#8593;</ng-container>
+        <ng-container *ngIf="!sortAsc">&#8595;</ng-container>
+      </span>
     </div>
   </div>
 
   <div class="articles-grid">
-    <div class="article-card" *ngFor="let article of articles">
+    <a class="article-card" *ngFor="let article of articles" [routerLink]="['/articles', article.id]">
       <h3>{{ article.title }}</h3>
       <div class="meta">
-        <span>{{ article.topic.name }}</span>
+        <span>{{ article.updatedAt | date:'dd/MM/yyyy' }}</span>
         <span>{{ article.author.username }}</span>
       </div>
       <p>{{ article.content }}</p>
-    </div>
+    </a>
   </div>
 </main>

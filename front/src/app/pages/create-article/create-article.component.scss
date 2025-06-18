@@ -1,0 +1,131 @@
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  .logo {
+    height: 48px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    a {
+      color: #6c63ff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      &.logout {
+        color: #e53935;
+        font-weight: bold;
+      }
+    }
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.dashboard-main {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 2rem 1rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.create-article-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  select,
+  input,
+  textarea {
+    border: 2px solid #b39ddb;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    &:focus {
+      border-color: #7c4dff;
+    }
+  }
+  select {
+    color: #888;
+  }
+  textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+  .submit-btn {
+    background: #7c4dff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:disabled {
+      background: #d1c4e9;
+      cursor: not-allowed;
+    }
+    &:hover:not(:disabled) {
+      background: #512da8;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-main {
+    max-width: 100vw;
+    padding: 1rem 0.3rem 0 0.3rem;
+  }
+  .create-article-form {
+    gap: 1rem;
+    select,
+    input,
+    textarea {
+      font-size: 0.98rem;
+      padding: 0.7rem 0.7rem;
+    }
+    .submit-btn {
+      font-size: 1rem;
+      padding: 0.7rem 0;
+    }
+  }
+}

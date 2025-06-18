@@ -4,9 +4,13 @@ import com.openclassrooms.mddapi.dto.ArticleDTO;
 import com.openclassrooms.mddapi.model.Article;
 import com.openclassrooms.mddapi.service.ArticleService;
 import com.openclassrooms.mddapi.mapper.ArticleMapper;
+import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +25,9 @@ public class ArticleController {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public ResponseEntity<List<ArticleDTO>> getAllArticles() {
         List<ArticleDTO> articles = articleService.findAll().stream()
@@ -31,14 +38,26 @@ public class ArticleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDTO> getArticleById(@PathVariable Long id) {
+        System.out.println("Recherche de l'article avec l'ID: " + id);
         return articleService.findById(id)
-                .map(articleMapper::toDTO)
+                .map(article -> {
+                    System.out.println("Article trouvé: " + article.getTitle());
+                    return articleMapper.toDTO(article);
+                })
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> {
+                    System.out.println("Aucun article trouvé avec l'ID: " + id);
+                    return ResponseEntity.notFound().build();
+                });
     }
 
     @PostMapping
     public ResponseEntity<ArticleDTO> createArticle(@RequestBody Article article) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+        article.setAuthor(user);
         Article savedArticle = articleService.save(article);
         return ResponseEntity.ok(articleMapper.toDTO(savedArticle));
     }
