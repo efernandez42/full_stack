@@ -17,7 +17,7 @@ et gérer leur profil.
 - Spring Boot 3
 - Spring Security (JWT)
 - Spring Data JPA (Hibernate)
-- Base de données relationnelle (H2, PostgreSQL...)
+- Base de données relationnelle (MySQL)
 
 ## Structure du projet :
 - **controller** : Contrôleurs REST exposant les endpoints de l'API
