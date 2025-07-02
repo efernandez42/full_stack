@@ -1,14 +1,4 @@
-<header class="dashboard-header">
-  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
-  <nav>
-    <a class="logout" href="#" (click)="logout()">Se déconnecter</a>
-    <a routerLink="/dashboard">Articles</a>
-    <a routerLink="/themes">Thèmes</a>
-    <a class="profile-icon" routerLink="/profile">
-      <img src="/assets/profile-placeholder.png" alt="Profil" />
-    </a>
-  </nav>
-</header>
+<app-header></app-header>
 
 <main class="dashboard-main">
   <div class="dashboard-actions">
@@ -23,13 +13,13 @@
   </div>
 
   <div class="articles-grid">
-    <a class="article-card" *ngFor="let article of articles" [routerLink]="['/articles', article.id]">
+    <a class="article-card" *ngFor="let article of sortedArticles" [routerLink]="['/articles', article.id]">
       <h3>{{ article.title }}</h3>
       <div class="meta">
         <span>{{ article.updatedAt | date:'dd/MM/yyyy' }}</span>
         <span>{{ article.author.username }}</span>
       </div>
-      <p>{{ article.content }}</p>
+      <p class="ellipsis-5-lines">{{ article.content }}</p>
     </a>
   </div>
 </main>

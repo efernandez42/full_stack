@@ -1,0 +1,209 @@
+@mixin menuButton($btnSize, $barWidth, $min: null, $height: null) {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: $btnSize;
+    min-width: $min;
+    max-width: 44px;
+    height: $height;
+    cursor: pointer;
+    padding: 0;
+    z-index: 20;
+  
+    span {
+      display: block;
+      width: $barWidth;
+      min-width: 22px;
+      max-width: 32px;
+      height: 4px;
+      margin: 3px 0;
+      background: #222;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+  }
+  
+  @mixin profileIcon($size) {
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    &:hover {
+      box-shadow: 0 0 0 2px #7c4dff;
+    }
+  }
+  
+  // === STYLES COMMUNS ===
+  nav a {
+    font-family: Inter, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #000;
+    text-decoration: none;
+    transition: color 0.2s;
+  
+    &.active {
+      color: #6C5CCF;
+    }
+  
+    &.logout {
+      color: #e53935;
+      font-weight: bold;
+    }
+  }
+  
+  // === HEADER DESKTOP ===
+  .header-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    position: relative;
+    z-index: 10;
+  
+    .logo {
+      width: 140px;
+      height: auto;
+    }
+  
+    .menu-btn {
+      @include menuButton(36px, 28px);
+    }
+  
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+  
+      .profile-icon {
+        @include profileIcon(36px);
+      }
+    }
+  }
+  
+  .header-mobile {
+    display: none;
+  }
+  
+  // === RESPONSIVE MOBILE ===
+  @media (max-width: 700px) {
+    .header-desktop {
+      display: none;
+    }
+  
+    .header-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100vw;
+      padding: 0.5rem 4vw;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+      background: #fff;
+      position: relative;
+      z-index: 10;
+  
+      .logo {
+        width: 22vw;
+        min-width: 60px;
+        max-width: 140px;
+        height: auto;
+      }
+  
+      .menu-btn {
+        @include menuButton(9vw, 7vw, 32px, 44px);
+      }
+    }
+  
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -50vw;
+      width: 50vw;
+      height: 100vh;
+      background: #fff;
+      box-shadow: -2px 0 16px #0003;
+      z-index: 200;
+      transition: right 0.3s cubic-bezier(.4, 0, .2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 2rem;
+      border-left: 1px solid #eee;
+  
+      &.open {
+        right: min(10px, 2vw) !important;
+      }
+  
+      nav {
+        margin-top: 50px;
+        width: 100%;
+        padding-right: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2rem;
+  
+        a {
+          color: #222;
+          font-size: 1.5rem;
+          font-weight: 400;
+          margin-right: 20px;
+  
+          &.logout {
+            color: #b71c1c;
+            font-weight: bold;
+            font-size: 1.1rem;
+          }
+        }
+      }
+  
+      .profile-icon-mobile {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+  
+        img {
+          @include profileIcon(48px);
+          box-shadow: 0 2px 8px #0001;
+        }
+      }
+    }
+  }
+  
+  .side-menu.open {
+    right: 0 !important;
+  }
+  
+  @media (min-width: 701px) {
+    .header-desktop {
+      display: flex;
+    }
+  
+    .header-mobile,
+    .side-menu {
+      display: none !important;
+    }
+  }
+  

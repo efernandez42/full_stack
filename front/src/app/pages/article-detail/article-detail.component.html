@@ -1,17 +1,7 @@
-<header class="header">
-  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
-  <nav>
-    <a class="logout" routerLink="/login">Se déconnecter</a>
-    <a routerLink="/dashboard">Articles</a>
-    <a href="">Thèmes</a>
-    <span class="profile-icon">
-      <img src="/assets/profile-placeholder.png" alt="Profil" />
-    </span>
-  </nav>
-</header>
+<app-header></app-header>
 
+<button class="back-button" (click)="goBack()">&#8592;</button>
 <main class="main">
-  <button class="back-button" (click)="goBack()">&#8592;</button>
   <h3 class="title">{{ article?.title}}</h3>
   <div *ngIf="isLoading">Chargement...</div>
   <div *ngIf="errorMessage">{{ errorMessage }}</div>
@@ -19,6 +9,8 @@
     <div class="meta-row">
       <span>{{ article.updatedAt | date:'dd/MM/yyyy' }}</span>
       <span> {{ article.author.username }}</span>
+    </div>
+    <div class="topic-row">
       <span>{{ article.topic.name }}</span>
     </div>
     <div class="content-block">

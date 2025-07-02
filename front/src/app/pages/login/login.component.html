@@ -1,10 +1,26 @@
-<div>
-  <img src="/assets/logo_p6.png" alt="logo" class=" logo" />
+<!-- Version mobile -->
+<div class="mobile-header">
+  <div>
+    <button class="back-button" (click)="goBack()">&#8592;</button>
+  </div>
+  <div class="logo-container">   
+    <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  </div>
 </div>
-<div class="bar"></div>
+
+<div class="desktop-header">
+  <div>
+    <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  </div>
+  <div class="bar"></div>
+  <div class="main">
+    <button class="desktop-back-button" (click)="goBack()">&#8592;</button>
+    <h2>Se connecter</h2>
+  </div>
+</div>
 <div class="main">
-  <button class="back-button" (click)="goBack()">&#8592;</button>
-  <h2>Se connecter</h2>
+
+  <h2 class="mobile-header">Se connecter</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label for="email">E-mail ou nom d'utilisateur</label>
     <input id="email" formControlName="email" type="text" />

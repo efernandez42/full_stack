@@ -14,9 +14,10 @@ import { CreateArticleComponent } from './pages/create-article/create-article.co
 import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TopicsComponent } from './pages/topics/topics.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, AppComponent, CreateArticleComponent, ArticleDetailComponent, ProfileComponent, TopicsComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, AppComponent, CreateArticleComponent, ArticleDetailComponent, ProfileComponent, TopicsComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

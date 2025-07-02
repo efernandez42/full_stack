@@ -8,8 +8,8 @@
 }
 
 .home-logo {
-  width: 340px;
-  max-width: 80vw;
+  width: 412px;
+  height: 238px; 
   margin-bottom: 3rem;
 }
 
@@ -17,30 +17,30 @@
   display: flex;
   gap: 2.5rem;
   justify-content: center;
-}
-
-.home-buttons button {
+  
+  button {
   background: #fff;
-  color: #222;
-  border: 2px solid #222;
+  color: #000000;
+  border: 1px solid #000000;
   border-radius: 8px;
   padding: 0.7rem 2.2rem;
-  font-size: 1.1rem;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border 0.2s;
-  outline: none;
-}
-
-.home-buttons button:hover {
-  background: #6c63ff;
-  color: #fff;
-  border-color: #6c63ff;
+  font-family: 'Inter', Arial, sans-serif;
+  }
+  button:hover {
+    background: #6c63ff;
+    color: #fff;
+    border-color: #6c63ff;
+  }
 }
 
 @media (max-width: 600px) {
   .home-logo {
-    width: 70vw;
+    width: 225px;
+    height: 130px; 
     margin-bottom: 2.2rem;
   }
   .home-buttons {
@@ -50,9 +50,8 @@
     align-items: center;
   }
   .home-buttons button {
-    width: 90vw;
-    max-width: 320px;
+    width: 156px;
     padding: 0.9rem 0;
-    font-size: 1.08rem;
+    font-size: 16px;
   }
 }

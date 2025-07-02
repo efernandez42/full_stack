@@ -1,17 +1,10 @@
-<header class="dashboard-header">
-  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
-  <nav>
-    <a class="logout" routerLink="/login">Se déconnecter</a>
-    <a routerLink="/dashboard">Articles</a>
-    <a href="">Thèmes</a>
-    <span class="profile-icon">
-      <img src="/assets/profile-placeholder.png" alt="Profil" />
-    </span>
-  </nav>
-</header>
+<app-header></app-header>
 
 <main class="dashboard-main">
-  <button class="back-btn" routerLink="/dashboard">&#8592;</button>
+  <button class="desktop-back-btn" routerLink="/dashboard">&#8592;</button>
+  <div class="mobile-header-row">
+    <button class="mobile-back-btn" routerLink="/dashboard">&#8592;</button>
+  </div>
   <h2 class="title">Créer un nouvel article</h2>
   <form class="create-article-form" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
     <select formControlName="topicId">

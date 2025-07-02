@@ -1,0 +1,32 @@
+<!-- Header Desktop (Web) -->
+<header class="header-desktop">
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  <nav>
+    <a class="logout" routerLink="/login">Se déconnecter</a>
+    <a routerLink="/dashboard" routerLinkActive="active">Articles</a>
+    <a routerLink="/themes" routerLinkActive="active">Thèmes</a>
+    <a class="profile-icon" routerLink="/profile">
+      <img src="/assets/user.png" alt="Profil" />
+    </a>
+  </nav>
+</header>
+
+<!-- Header Mobile -->
+<header class="header-mobile">
+  <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  <button class="menu-btn" (click)="toggleMenu()" aria-label="Ouvrir le menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+<aside class="side-menu" [class.open]="menuOpen" (click)="closeMenu()">
+  <nav (click)="$event.stopPropagation()">
+    <a class="logout" routerLink="/login">Se déconnecter</a>
+    <a routerLink="/dashboard">Articles</a>
+    <a routerLink="/themes">Thèmes</a>
+  </nav>
+  <a class="profile-icon-mobile" routerLink="/profile">
+    <img src="/assets/user.png" alt="Profil" />
+  </a>
+</aside>
