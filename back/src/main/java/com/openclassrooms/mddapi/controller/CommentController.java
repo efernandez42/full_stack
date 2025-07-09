@@ -17,6 +17,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Contrôleur REST pour la gestion des commentaires.
+ * Fournit des endpoints pour créer, lire, mettre à jour et supprimer des commentaires.
+ */
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
@@ -33,6 +37,10 @@ public class CommentController {
     @Autowired
     private ArticleRepository articleRepository;
 
+    /**
+     * Récupère la liste de tous les commentaires.
+     * @return la liste des commentaires sous forme de DTO
+     */
     @GetMapping
     public ResponseEntity<List<CommentDTO>> getAllComments() {
         List<CommentDTO> comments = commentService.findAll().stream()
@@ -41,6 +49,11 @@ public class CommentController {
         return ResponseEntity.ok(comments);
     }
 
+    /**
+     * Récupère les commentaires associés à un article donné.
+     * @param articleId l'identifiant de l'article
+     * @return la liste des commentaires de l'article sous forme de DTO
+     */
     @GetMapping("/article/{articleId}")
     public ResponseEntity<List<CommentDTO>> getCommentsByArticleId(@PathVariable Long articleId) {
         List<CommentDTO> comments = commentService.findByArticleId(articleId).stream()
@@ -49,6 +62,11 @@ public class CommentController {
         return ResponseEntity.ok(comments);
     }
 
+    /**
+     * Récupère un commentaire par son identifiant.
+     * @param id l'identifiant du commentaire
+     * @return le commentaire correspondant sous forme de DTO, ou 404 si non trouvé
+     */
     @GetMapping("/{id}")
     public ResponseEntity<CommentDTO> getCommentById(@PathVariable Long id) {
         return commentService.findById(id)
@@ -57,6 +75,11 @@ public class CommentController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Crée un nouveau commentaire.
+     * @param comment le commentaire à créer
+     * @return le commentaire créé sous forme de DTO
+     */
     @PostMapping
     public ResponseEntity<CommentDTO> createComment(@RequestBody Comment comment) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -76,6 +99,12 @@ public class CommentController {
         return ResponseEntity.ok(commentMapper.toDTO(savedComment));
     }
 
+    /**
+     * Met à jour un commentaire existant.
+     * @param id l'identifiant du commentaire à mettre à jour
+     * @param comment les nouvelles données du commentaire
+     * @return le commentaire mis à jour sous forme de DTO, ou 404 si non trouvé
+     */
     @PutMapping("/{id}")
     public ResponseEntity<CommentDTO> updateComment(@PathVariable Long id, @RequestBody Comment comment) {
         return commentService.findById(id)
@@ -87,6 +116,11 @@ public class CommentController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Supprime un commentaire par son identifiant.
+     * @param id l'identifiant du commentaire à supprimer
+     * @return une réponse vide si la suppression a réussi, ou 404 si non trouvé
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         return commentService.findById(id)

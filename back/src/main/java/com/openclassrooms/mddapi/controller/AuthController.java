@@ -16,6 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
 
+/**
+ * Contrôleur REST pour l'authentification et la gestion du profil utilisateur.
+ * Fournit des endpoints pour la connexion, l'inscription et la mise à jour du profil.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -30,18 +34,33 @@ public class AuthController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    /**
+     * Authentifie un utilisateur avec son email et mot de passe.
+     * @param loginRequest les informations de connexion
+     * @return la réponse contenant le token JWT et les informations utilisateur
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         LoginResponse response = authService.login(loginRequest);
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Inscrit un nouvel utilisateur.
+     * @param registerRequest les informations d'inscription
+     * @return la réponse contenant le token JWT et les informations utilisateur
+     */
     @PostMapping("/register")
     public ResponseEntity<LoginResponse> register(@RequestBody RegisterRequest registerRequest) {
         LoginResponse response = authService.register(registerRequest);
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Met à jour le profil de l'utilisateur connecté.
+     * @param userDTO les nouvelles informations du profil
+     * @return la réponse contenant le nouveau token JWT et les informations utilisateur mises à jour
+     */
     @PutMapping("/profile")
     public ResponseEntity<LoginResponse> updateProfile(@RequestBody UserDTO userDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

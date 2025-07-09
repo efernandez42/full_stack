@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Contrôleur REST pour la gestion des sujets (topics).
+ * Fournit des endpoints pour s'abonner, se désabonner et consulter les sujets.
+ */
 @RestController
 @RequestMapping("/api/topics")
 public class TopicController {
@@ -27,6 +31,10 @@ public class TopicController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Récupère la liste de tous les sujets.
+     * @return la liste des sujets sous forme de DTO
+     */
     @GetMapping
     public ResponseEntity<List<TopicDTO>> getAllTopics() {
         List<TopicDTO> topics = topicService.findAll().stream()
@@ -35,6 +43,11 @@ public class TopicController {
         return ResponseEntity.ok(topics);
     }
 
+    /**
+     * Récupère un sujet par son identifiant.
+     * @param id l'identifiant du sujet
+     * @return le sujet correspondant sous forme de DTO, ou 404 si non trouvé
+     */
     @GetMapping("/{id}")
     public ResponseEntity<TopicDTO> getTopicById(@PathVariable Long id) {
         return topicService.findById(id)
@@ -43,6 +56,11 @@ public class TopicController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Abonne l'utilisateur connecté à un sujet.
+     * @param id l'identifiant du sujet
+     * @return une réponse vide si l'abonnement a réussi, ou 404 si le sujet n'existe pas
+     */
     @PostMapping("/{id}/subscribe")
     public ResponseEntity<Void> subscribeToTopic(@PathVariable Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -55,6 +73,11 @@ public class TopicController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Désabonne l'utilisateur connecté d'un sujet.
+     * @param id l'identifiant du sujet
+     * @return une réponse vide si le désabonnement a réussi, ou 404 si le sujet n'existe pas
+     */
     @PostMapping("/{id}/unsubscribe")
     public ResponseEntity<Void> unsubscribeFromTopic(@PathVariable Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -67,6 +90,10 @@ public class TopicController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Récupère la liste des sujets auxquels l'utilisateur connecté est abonné.
+     * @return la liste des sujets abonnés sous forme de DTO
+     */
     @GetMapping("/subscribed")
     public ResponseEntity<List<TopicDTO>> getSubscribedTopics() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
